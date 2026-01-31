@@ -24,8 +24,6 @@ jobs:
       run: |
         git config --global user.name "github-actions"
         git config --global user.email "github-actions"
-        git clone https://github.com/whanci/gac-app.git
-        cd gac-app
         aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 586639730662.dkr.ecr.ap-northeast-2.amazonaws.com 
     - name: CI-build
   
@@ -38,7 +36,6 @@ jobs:
     - name: CD-full
       run: | 
         git remote remove origin
-        cd ..
         git remote add origin https://github.com/whanci/gac-gitops.git
         cd gac-gitops
         git config --global user.name "GIT"
