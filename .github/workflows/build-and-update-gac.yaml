@@ -39,7 +39,7 @@ jobs:
         cd gac-gitops
         git add deploy.yaml
         git commit -m "Update deployment image to ${{ steps.date.outputs.date }}"
+        git push origin https://whanci:$TOKEN@github.com/WhAnci/gac-gitops.git
       with:
         TOKEN: ${{ secrets.GHUB_TOKEN }}
-        git push origin https://whanci:$TOKEN@github.com/WhAnci/gac-gitops.git
       
