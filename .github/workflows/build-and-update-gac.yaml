@@ -13,7 +13,6 @@ jobs:
     - uses: actions/checkout@v4
       with:
           AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
-          AWS_DEFAULT_REGION: "ap-northeast-2"
           TZ: "Asia/Seoul"
           IMAGE_TAG: $(TZ=$TZ date +"%Y-%m-%d.%H.%M.%S")
 
@@ -21,16 +20,16 @@ jobs:
       run: |
         git config --global user.name "github-actions"
         git config --global user.email "github-actions"
-        aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin 586639730662.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com 
+        aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 586639730662.dkr.ecr.ap-northeast-2.amazonaws.com 
     
     - name: CI-build
   
       run: |
-        docker build -t 586639730662.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/gac-app:$IMAGE_TAG .
+        docker build -t 586639730662.dkr.ecr.ap-northeast-2.amazonaws.com/gac-app:$IMAGE_TAG .
     
     - name: CI-post_build
       run: |
-        docker push 586639730662.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/gac-app:$IMAGE_TAG
+        docker push 586639730662.dkr.ecr.ap-northeast-2.amazonaws.com/gac-app:$IMAGE_TAG
 
     - name: CD-full
       run: | 
