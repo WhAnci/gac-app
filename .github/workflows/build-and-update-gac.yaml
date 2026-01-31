@@ -27,7 +27,7 @@ jobs:
       run: |
         docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
 
-    - name: CD 
+    - name: CD-full
       run: | 
         git clone origin https://WhAnci:${{ secrets.ghub_token }}@github.com/WhAnci/gac-gitops.git
         sed -i "s|586639730662.dkr.ecr.ap-northeast-2.amazonaws.com/[^ ]*|586639730662.dkr.ecr.ap-northeast-2.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG|g" gac-gitops/deploy.yaml
