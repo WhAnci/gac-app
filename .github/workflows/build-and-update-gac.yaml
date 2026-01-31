@@ -21,11 +21,11 @@ jobs:
     
     - name: CI-build
       run: |
-        docker build -t $AWS_ACCOUNT_ID.dkr.ecr.${{ secrets.AWS_DEFAULT_REGION }}.amazonaws.com/${{ secrets.IMAGE_REPO_NAME}}:${{ secrets.IMAGE_TAG}} .
+        docker build -t ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_DEFAULT_REGION }}.amazonaws.com/${{ secrets.IMAGE_REPO_NAME}}:${{ secrets.IMAGE_TAG}} .
     
     - name: CI-post_build
       run: |
-        docker push $AWS_ACCOUNT_ID.dkr.ecr.${{ secrets.AWS_DEFAULT_REGION }}.amazonaws.com/${{ secrets.IMAGE_REPO_NAME}}:${{ secrets.IMAGE_TAG}}
+        docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_DEFAULT_REGION }}.amazonaws.com/${{ secrets.IMAGE_REPO_NAME}}:${{ secrets.IMAGE_TAG}}
 
     - name: CD-full
       run: | 
