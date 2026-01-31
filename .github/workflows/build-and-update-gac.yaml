@@ -13,8 +13,8 @@ jobs:
     - uses: actions/checkout@v4
       with:
         AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
-        TZ: "Asia/Seoul"
       env:
+        TZ: "Asia/Seoul"
         IMAGE_TAG: $(TZ=$TZ date +"%Y-%m-%d.%H.%M.%S")
 
     - name: CI-pre_build # 
