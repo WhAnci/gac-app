@@ -11,9 +11,6 @@ jobs:
     
 
     steps:
-    - uses: fregante/setup-git-token@v1
-      with:
-        token: ${{ secrets.GHUB_TOKEN }}
     - uses: actions/checkout@v4
     - name: Get current date
       id: date
@@ -42,5 +39,10 @@ jobs:
         cd gac-gitops
         git add deploy.yaml
         git commit -m "Update deployment image to ${{ steps.date.outputs.date }}"
-        git push origin https://github.com/WhAnci/gac-gitops.git
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GHUB_TOKEN }}
+        repository: whanci/gac-gitops
+        force: true
       
