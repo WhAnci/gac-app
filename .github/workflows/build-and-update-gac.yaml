@@ -14,10 +14,10 @@ jobs:
 
     - name: env
       run: |
-        AWS_ACCOUNT_ID=${{ secrets.AWS_ACCOUNT_ID }}
-        AWS_DEFAULT_REGION=ap-northeast-2
-        TZ="Asia/Seoul"
-        IMAGE_TAG=$(TZ=$TZ date +"%Y-%m-%d.%H.%M.%S")
+        env AWS_ACCOUNT_ID=${{ secrets.AWS_ACCOUNT_ID }}
+        env AWS_DEFAULT_REGION=ap-northeast-2
+        env TZ="Asia/Seoul"
+        env IMAGE_TAG=$(TZ=$TZ date +"%Y-%m-%d.%H.%M.%S")
         
         
 
