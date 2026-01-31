@@ -11,6 +11,9 @@ jobs:
     
 
     steps:
+    - uses: de-vri-es/setup-git-credentials@v2
+      with:
+        credentials: ${{secrets.PAT}}
     - uses: actions/checkout@v4
     - name: Get current date
       id: date
@@ -34,20 +37,10 @@ jobs:
         docker push 586639730662.dkr.ecr.ap-northeast-2.amazonaws.com/gac-app:${{ steps.date.outputs.date }}
     - name: CD-full
       run: | 
-        git clone https://github.com/WhAnci/gac-gitops.git
+        git clone https://$username:$token@github.com/WhAnci/gac-gitops.git
         sed -i "s|586639730662.dkr.ecr.ap-northeast-2.amazonaws.com/[^ ]*|586639730662.dkr.ecr.ap-northeast-2.amazonaws.com/gac-app:${{ steps.date.outputs.date }}|g" gac-gitops/deploy.yaml
         cd gac-gitops
         git add .
         git commit -m "Update deployment image to ${{ steps.date.outputs.date }}"
-        
-    - name: Push to Destination Repo
-      uses: cpina/github-action-push-to-another-repository@main
-      env:
-        API_TOKEN_GITHUB: ${{ secrets.PAT }} # 등록한 Secret 사용
-      with:
-        source-directory: '.' # 푸시할 소스 디렉토리
-        destination-github-username: 'whanci'
-        destination-repository-name: 'gac-gitops'
-        user-email: 'actions@github.com'
-        commit-message: 'Update from origin repo'
+        git push 
     
