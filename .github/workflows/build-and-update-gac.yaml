@@ -5,6 +5,10 @@ on:
 
   workflow_dispatch:
 
+env:
+  TZ: "Asia/Seoul"
+  IMAGE_TAG: $(TZ=$TZ date +"%Y-%m-%d.%H.%M.%S")
+
 jobs:
   build:
     runs-on: self-hosted
@@ -13,9 +17,6 @@ jobs:
     - uses: actions/checkout@v4
       with:
         AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
-      env:
-        TZ: "Asia/Seoul"
-        IMAGE_TAG: $(TZ=$TZ date +"%Y-%m-%d.%H.%M.%S")
 
     - name: CI-pre_build # 
       run: |
