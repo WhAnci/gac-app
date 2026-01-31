@@ -13,11 +13,11 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: CI-pre_build # 
-        with:
-          AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
-          AWS_DEFAULT_REGION: "ap-northeast-2"
-          TZ: "Asia/Seoul"
-          IMAGE_TAG: $(TZ=$TZ date +"%Y-%m-%d.%H.%M.%S")
+      with:
+        AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+        AWS_DEFAULT_REGION: "ap-northeast-2"
+        TZ: "Asia/Seoul"
+        IMAGE_TAG: $(TZ=$TZ date +"%Y-%m-%d.%H.%M.%S")
       run: |
         git config --global user.name "github-actions"
         git config --global user.email "github-actions"
