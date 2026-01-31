@@ -16,7 +16,7 @@ jobs:
 
     - name: Get current date
       id: date
-      run: echo "date=$('KST -9' date +'%Y-%m-%d-%H-%M-%S')" >> "$GITHUB_OUTPUT"
+      run: echo "date=$(date +'%Y-%m-%d-%H-%M-%S')" >> "$GITHUB_OUTPUT"
     - run: echo ${{ steps.date.outputs.date }}
       
     - name: CI-pre_build # 
