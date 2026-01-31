@@ -24,9 +24,9 @@ jobs:
       run: |
         git config --global user.name "github-actions"
         git config --global user.email "github-actions"
-        
+        git clone https://github.com/whanci/gac-app.git
+        cd gac-app
         aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 586639730662.dkr.ecr.ap-northeast-2.amazonaws.com 
-    
     - name: CI-build
   
       run: |
@@ -37,10 +37,14 @@ jobs:
         docker push 586639730662.dkr.ecr.ap-northeast-2.amazonaws.com/gac-app:${{ steps.date.outputs.date }}
     - name: CD-full
       run: | 
-        git remote add origin https://github.com/whanci/gac-gitops.git
+        cd ..
+        git clone https://github.com/WhAnci/gac-gitops.git
         cd gac-gitops
+        git config --global user.name "GIT"
+        git config --global user.email "GIT"
         sed -i "s|586639730662.dkr.ecr.ap-northeast-2.amazonaws.com/[^ ]*|586639730662.dkr.ecr.ap-northeast-2.amazonaws.com/gac-app:${{ steps.date.outputs.date }}|g" deploy.yaml
         git add .
         git commit -m "Update deployment image to ${{ steps.date.outputs.date }}"
+        git remote add origin https://github.com/whanci/gac-gitops.git
         git push -u origin main
     
