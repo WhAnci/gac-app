@@ -5,9 +5,6 @@ on:
 
   workflow_dispatch:
 
-env:
-  IMAGE_TAG: $(TZ='KST-9' date +"%Y-%m-%d.%H.%M.%S")
-
 jobs:
   build:
     runs-on: self-hosted
@@ -21,6 +18,7 @@ jobs:
       run: |
         git config --global user.name "github-actions"
         git config --global user.email "github-actions"
+        IMAGE_TAG=$(TZ='KST-9' date +"%Y-%m-%d.%H.%M.%S")
         aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 586639730662.dkr.ecr.ap-northeast-2.amazonaws.com 
     
     - name: CI-build
